@@ -1,0 +1,47 @@
+// Fonts
+@font-face {
+  font-family: "OpenSans-Light";
+  src: url("fonts/open_sans/OpenSans-Light.ttf");
+}
+
+@font-face {
+  font-family: "OpenSans-Regular";
+  src: url("fonts/open_sans/OpenSans-Regular.ttf");
+}
+
+@font-face {
+  font-family: "OpenSans-Semibold";
+  src: url("fonts/open_sans/OpenSans-Semibold.ttf");
+}
+
+@font-face {
+  font-family: "OpenSans-Bold";
+  src: url("fonts/open_sans/OpenSans-Bold.ttf");
+}
+
+@font-face {
+  font-family: "OpenSans-ExtraBold";
+  src: url("fonts/open_sans/OpenSans-ExtraBold.ttf");
+}
+
+// Font variables
+$opensans-light: "OpenSans-Light", sans-serif;
+$opensans-regular: "OpenSans-Regular", sans-serif;
+$opensans-semibold: "OpenSans-Semibold", sans-serif;
+$opensans-bold: "OpenSans-Bold", sans-serif;
+$opensans-extrabold: "OpenSans-ExtraBold", sans-serif;
+
+// Color variables
+$white: #FFFFFF;
+$red: #D10003;
+$extra-light-grey: #EDEDED;
+$light-grey: #D9D9D9;
+$grey: #949494;
+$dark-grey: #616161;
+
+// General variables
+$header-height: 50px;
+$footer-height: 50px;
+$content-width: 50%;
+
+

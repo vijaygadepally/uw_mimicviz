@@ -1,0 +1,120 @@
+@import "common";
+
+.form {
+
+  .form-description {
+    color: $grey;
+    font-size: 14px;
+    margin: 0px 0px 20px 0px;
+  }
+
+  .waveform-id-container, .waveform-id, .waveform-image {
+    display: none;
+  }
+
+  .spin-loader {
+    display: none;
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+
+  .form-element {
+    margin: 30px 0px;
+
+    .form-element-title {
+      text-transform: uppercase;
+      font-size: 18px;
+    }
+
+    hr {
+      border: none;
+      height: 1px;
+      background-color: $grey;
+    }
+
+    .scrollable-content {
+      max-height: 220px;
+      overflow-y: scroll;
+    }
+
+    .form-element-content {
+      input {
+        box-sizing: border-box;
+        height: 30px;
+        width: 100%;
+        margin: 10px 0px;
+        padding: 0px 10px;
+        border: 1px solid $grey;
+        border-radius: 3px;
+        font-family: $opensans-light;
+        font-size: 15px;
+        color: $red;
+      }
+
+      input:focus {
+        outline: 0;
+        border: 1px solid $red;
+      }
+
+      .form-table {
+        margin-top: 10px;
+        width: 100%;
+
+        .form-table-row {
+          .form-table-cell {
+            border: 1px solid $light-grey;
+            padding: 10px;
+          }
+
+          .form-table-cell:hover {
+            cursor: pointer;
+            background-color: $light-grey;
+            border: 1px solid $red;
+          }
+
+          .selected {
+            border: 1px solid $red;
+            background-color: $light-grey;
+          }
+        }
+
+      }
+
+      img {
+        width: 100%;
+        border: 1px solid $grey;
+        margin-top: 10px;
+      }
+    }
+  }
+
+  .query-button-container {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 40px;
+
+    .query-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: $red;
+      color: $white;
+    }
+
+    .query-button:hover {
+      cursor: pointer;
+      background-color: $grey;
+    }
+  }
+
+  .waveform-id-container {
+    text-align: center;
+    text-transform: uppercase;
+
+    .waveform-id-display {
+      margin: 20px 0px;
+      font-family: $opensans-semibold;
+    }
+  }
+}

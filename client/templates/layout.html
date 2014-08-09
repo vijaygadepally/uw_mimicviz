@@ -1,0 +1,34 @@
+<template name="mainLayout">
+  <div class="everything">
+    {{ > header }}
+    <div class="container">
+      <div class="content">
+        {{ > yield }}
+      </div>
+    </div>
+    {{ > footer }}
+  </div>
+</template>
+
+<template name="header">
+  <div class="header">
+    <div class="navbar">
+      <a href="{{ pathFor 'home' }}">
+        <div class="logo">
+          <i class="fa fa-plus"></i>
+        </div>
+        <div class="title">
+          Mimic Dataset Visualization
+        </div>
+      </a>
+    </div>
+  </div>
+</template>
+
+<template name="footer">
+  <div class="footer">
+    <div class="footer-content">
+      &copy; 2014. This visualization was made and maintained by the MIT Databases Group and the MIT Lincoln Lab, source on <a href="#" target="_blank">GitHub</a>
+    </div>
+  </div>
+</template>

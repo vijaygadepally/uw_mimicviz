@@ -1,0 +1,53 @@
+<template name="home">
+  <div class="form">
+    <div class="form-description">
+    MIMIC2 Visualization Web Frontend
+    </div>
+
+    <div class="form-element medication-name">
+      <div class="form-element-title">
+        1. Medication Name
+      </div>
+      <hr />
+      <div class="form-element-content">
+        <input type="text" placeholder="Enter a medication name (e.g. Lisinopril)" class="input-medication-name" />
+      </div>
+    </div>
+
+    <div class="form-element patient-id">
+      <div class="form-element-title">
+        2. Patient IDs Associated with Entered Medication
+      </div>
+      <hr />
+      <div class="form-element-content scrollable-content">
+        <input type="text" placeholder="Enter patient ID (e.g. 00124)" class="input-patient-id" />
+      </div>
+    </div>
+
+    <div class="query-button-container">
+      <div class="query-button">
+        QUERY
+      </div>
+    </div>
+
+    <div class="waveform-id-container">
+      <hr />
+      <br />
+      Found matching waveform with ID:
+      <div class="waveform-id-display">
+        {{waveform_id}}
+      </div>
+    </div>
+
+    <div class="form-element waveform-image">
+      <div class="form-element-title">
+        Waveform Display ({{waveform_id}})
+      </div>
+      <hr />
+      <div class="form-element-content">
+        <img src="url_path/{{ waveform_image_url }}" />
+      </div>
+    </div>
+    <div class="spin-loader"><i class="fa fa-spinner fa-spin"></i></div>
+  </div>
+</template>

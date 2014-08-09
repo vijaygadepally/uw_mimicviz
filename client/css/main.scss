@@ -1,0 +1,91 @@
+@import "common";
+
+html, body {
+  background-color: $extra-light-grey;
+  margin: 0px;
+  padding: 0px;
+  font-family: $opensans-light;
+  height: 100%;
+  color: $dark-grey;
+}
+
+a {
+  text-decoration: none;
+}
+
+.everything {
+  min-height: 100%;
+  position: relative;
+
+  .header {
+    height: $header-height;
+    width: 100%;
+    border-top: 5px solid $red;
+    border-bottom: 1px solid $light-grey;
+    background-color: $white;
+    position: fixed;
+
+    .navbar {
+      width: $content-width;
+      margin: 0 auto;
+
+      .logo {
+        float: left;
+        padding: 0px 15px;
+        line-height: $header-height;
+        background-color: $red;
+        color: $white;
+        font-size: 30px;
+      }
+
+      .title {
+        float: left;
+        padding: 0px 10px;
+        line-height: $header-height;
+        color: $red;
+        font-size: 20px;
+        text-transform: uppercase;
+      }
+    }
+
+  }
+
+  .container {
+    padding-top: $header-height + 15px;
+    padding-bottom: $footer-height + 15px;
+
+    .content {
+      box-sizing: border-box;
+      width: $content-width;
+      margin: 0px auto;
+      padding: 15px;
+      border: 1px solid $light-grey;
+      border-radius: 4px;
+      background-color: $white;
+    }
+  }
+
+  .footer {
+    position: absolute;
+    box-sizing: border-box;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: $footer-height;
+    margin: 0 auto;
+    background-color: $grey;
+    color: $light-grey;
+    font-size: 12px;
+    line-height: $footer-height;
+
+    a {
+      color: $white;
+    }
+
+    .footer-content {
+      width: $content-width;
+      margin: 0px auto;
+      padding-left: 10px;
+    }
+  }
+}

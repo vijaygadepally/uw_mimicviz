@@ -1,0 +1,72 @@
+#! /usr/bin/octave --traditional
+DB = DBserver('http://128.208.3.110:8080/','scidb','','','');
+%T=DB(['Z910<signal:double> [i0=0:0,1000,0,i=0:10000,10000,0]);
+%T=DB(['tmp_time<msec:int64>[x=0:1000000,1000000,0]']);
+T=DB(['tmp_time<msec:int64>[RecordName=1:1000000000000,10,0,x=0:1000000,1000000,0]']);
+
+%s = char(fread(fid)');
+%Smat = Str2mat(char(s)');
+%[s1 s2] = SplitStr(s, char(32));
+
+%strrep(s2, char(10), char(32));
+%s2mat = Str2mat(s2);
+%s2mat = s2mat(2:end,:);
+%s2 = Mat2str(s2mat);
+
+%s2= str2num(s2);
+t1 = sort(str2num(Val(T(:,:))));
+tcut = t1./125;
+
+if(nargin>2)
+ plotoutput=varargin{1};
+else
+ plotoutput=true;
+end
+
+minSigSq = 0.5;             % Signal peak threshold.
+maxBeatPerMin = 300;        % Max allowable beat rate.
+beatWindow = 300;           % Number of beats to average over.
+% Load data.
+
+dtcut = diff(tcut);
+
+% Select time points with a difference greater than the minimum.
+tpeak = tcut((dtcut > (60./maxBeatPerMin)));
+
+% Compute time between beats.
+instantTimePerBeat = diff(tpeak);
+
+% Get the time centered in the beat window.
+tavg = tpeak((beatWindow/2):(end-beatWindow/2));
+
+% Compute the average time of beats in the beat window.
+avgTimePerBeat = (tpeak(beatWindow:end)-tpeak(1:(end-beatWindow+1)))./beatWindow;
+
+% Compute the difference between the instantaneous beat and the average beat.
+instantTimeVariance = (instantTimePerBeat((beatWindow/2):(end-beatWindow/2+1)) - avgTimePerBeat).^2;
+
+avgTimeVariance = conv(instantTimePerBeat.^2,ones(beatWindow-1,1)./beatWindow,'valid') - (avgTimePerBeat.^2);
+
+ [haxes,hline1,hline2] = plotyy(tavg./3600,60./avgTimePerBeat,tavg./3600,avgTimeVariance./avgTimePerBeat,'plot','semilogy');
+
+axis(haxes(1),[0 9 40 160]);
+axis(haxes(2),[0 9 0.001 1]);
+xlim(haxes(1),'auto');
+xlim(haxes(2),'auto');
+
+set(haxes(1),'YTick',[40:20:160]);
+set(haxes(2),'YTick',[0.001 0.01 0.1 1]);
+ylabel(haxes(1),'average heart rate (beats/minute)');
+ylabel(haxes(2),'average relative heart rate variance');
+xlabel(haxes(2),'time (hours)');
+
+fid=fopen('/vega4/MIMIC2/pipeline/Step5_Viz/trunk/meteor_viz/file_io/waveformID.tsv');
+RecordName=deblank(char(fread(fid,inf)'));
+fclose(fid)
+outfilename=[RecordName '.png'];
+
+saveas(gcf, ['/vega4/MIMIC2/pipeline/Step5_Viz/trunk/meteor_viz/file_io/' outfilename]);
+
+success = true;
+
+exit

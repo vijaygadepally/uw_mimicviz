@@ -11,7 +11,7 @@ https://code.google.com/p/googleappengine/source/browse/trunk/python/google/appe
 
 import json
 import requests
-
+import os
 # Don't make this repository public without removing these!
 users_email_address = "bigdogintel@gmail.com"
 users_password      = "BigDawg!"
@@ -87,9 +87,10 @@ exportMyriaToSciDB(mimic_patient_min_waveform, "PP0");
 %afl("create array tmp_time<msec:int64>[RecordName=1:1000000000000,10,0,x=0:1000000,1000000,0]");
 %afl("redimension_store(filter(redimension(cross_join(waveform_signal_table as X, PP0T as Y, X.RecordName, Y.RecordName),<signal:double>[RecordName=1:1000000000000,10,0,msec=0:1000000000,100000,0]), pow(signal,2) > 0.5),tmp_time)");
 '''
-PATIENT_PATH = '/vega4/MIMIC2/pipeline/Step5_Viz/trunk/meteor_viz/file_io/patientID.tsv'
-MED_PATH = '/vega4/MIMIC2/pipeline/Step5_Viz/trunk/meteor_viz/file_io/medName.tsv'
-OUTPUT_PATH = '/vega4/MIMIC2/pipeline/Step5_Viz/trunk/meteor_viz/file_io/waveformID.tsv'
+VIZ_PATH = '/vega4/MIMIC2/scidb/pipeline/Step5_Viz/trunk/meteor_viz/'
+PATIENT_PATH = VIZ_PATH + 'file_io/patientID.tsv'
+MED_PATH = VIZ_PATH + 'file_io/medName.tsv'
+OUTPUT_PATH = VIZ_PATH+ 'file_io/waveformID.tsv'
 
 if __name__ == '__main__':
     patient_id = '124'
@@ -106,7 +107,9 @@ if __name__ == '__main__':
     result_obj = json.loads(result_json)
     wid = result_obj[0]['_COLUMN0_']
     print wid
-
+    print OUTPUT_PATH
     with open(OUTPUT_PATH, 'w') as fh:
         fh.write(str(wid))
-
+   
+   # os.system(OCTAVE_SCRIPT)
+ 

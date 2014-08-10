@@ -3,7 +3,9 @@ var fs, exec, http;
 var meteorRootDirectory = "/vega4/MIMIC2/scidb/pipeline/Step5_Viz/trunk/meteor_viz/";
 var fileIODirectory = meteorRootDirectory + "file_io/";
 
-var waveformIDFileName = "waveform_id.txt";
+var waveformIDFileName = "waveformID.tsv";
+var patientIDFileName = "patientID.tsv";
+var medicationsFileName = "medicationName.tsv";
 
 Meteor.startup(function() {
   fs = Npm.require("fs");
@@ -11,8 +13,7 @@ Meteor.startup(function() {
   exec = Npm.require("child_process").exec;
 });
 
-
-var waitForFileTimeout = 1000 * 10; // 10 seconds
+var waitForFileTimeout = 1000 * 30; // 30 seconds
 var timeoutMessage = 'QUERY TIMED OUT';
 
 function readFile(filePath) {
@@ -46,8 +47,16 @@ function waitForImage(filePath) {
 
 Meteor.methods({
   processMedicationAndPatientID: function(medicationName, patientID) {
-    var execCommand = "cd " + meteorRootDirectory + "&& python submit_federated_query.py " + "&& sleep 30 && ./runPartHBVarianceCode";
+    var fileContents1=medicationName;
+    var fileContents2=patientID;
+    var filePath1 = fileIODirectory + medicationsFileName;
+    var filePath2 = fileIODirectory + patientIDFileName;
     
+    fs.writeFileSync(filePath1, fileContents1);
+    fs.writeFileSync(filePath2, fileContents2);
+   
+    var execCommand ="python " + meteorRootDirectory + "submit_federated_query.py " + "&& " + meteorRootDirectory + "runPartHBVarianceCode";
+    console.log(execCommand);   
     exec(execCommand,
       function(err, stdout, stderr) {
         console.log("ERR");
